@@ -146,7 +146,7 @@ void dequeue(queue_ptr q, void_ptr data)
         if (data)
             memcpy(data, q->head->data, q->size);
 
-        // point temp pointer to header
+        // point temp pointer to head
         node_ptr temp = q->head;
 
         // point to next head
@@ -155,7 +155,7 @@ void dequeue(queue_ptr q, void_ptr data)
         // delete the temp node pointer memory
         _destroy_node(&temp);
 
-        // deacrese length
+        // decrease length
         q->length -= 1;
     }
 }
@@ -224,6 +224,7 @@ bool is_empty(queue_ptr q)
 */
 void destroy_queue(queue_ptr q)
 {
+    // iterate until head is present
     while (q->head)
     {
         dequeue(q, NULL);
