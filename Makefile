@@ -1,17 +1,23 @@
+override DEBUG=		# -DDEBUG for debugging logs
 CC=gcc
 BIN=example
+TEST=test/test.c
 OBJS=queue.o
 
 all: $(BIN)
 
 %.o: %.c %.h
-	$(CC) -c $< -o $@
+	$(CC) $(DEBUG) -c $< -o $@
 
 %.o: %.c
-	$(CC) $^ -o $@
+	$(CC) $(DEBUG) $^ -o $@
 
 $(BIN): $(BIN).c $(OBJS)
-	$(CC) $^ -o $@
+	$(CC) $(DEBUG) $^ -o $@.out
+
+test: $(TEST) $(OBJS)
+	$(CC) $(DEBUG) $^ -o $@.out
+	./test.out
 
 clean:
-	rm *.exe *.o
+	rm -f *.exe *.o *.out

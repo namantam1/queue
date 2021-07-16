@@ -8,7 +8,7 @@ typedef struct
     int age;
 } example_data;
 
-void print_example_data(void *d)
+void print_example_data(void_ptr d)
 {
     if (!d)
     {
@@ -96,7 +96,7 @@ int main()
     printf("q2 => empty: %d, length: %d\n", is_empty(q2), length(q2));
 
     // releasing the memory
-    destroy_queue(q1);
-    destroy_queue(q2);
+    destroy_queue(&q1);
+    destroy_queue(&q2);
     return 0;
 }

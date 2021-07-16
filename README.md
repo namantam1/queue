@@ -5,6 +5,7 @@
 2. Auto garbage collection while dequeuing the data from queue.
 3. No size restriction due to implementation with the help of linked list.
 4. Better data structure management.
+5. Add and Dequeue operation with time complexity of O(1).
 
 ## How to use -
 
@@ -36,6 +37,8 @@ int main() {
     destroy_queue(q);
 }
 ```
+### Check out example
+- [example](example.c)
 
 ## Issue
 
@@ -45,3 +48,6 @@ Any Contribution or suggestion are welcome.
 
 ## License
 This project is [MIT](LICENSE) License.
+
+## See also
+- [Stack Implemetation in C](https://github.com/namantam1/stack)

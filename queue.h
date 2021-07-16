@@ -23,7 +23,7 @@ extern "C"
      * 
      * @returns queue pointer
     */
-    queue *create_queue(size_t, const void *);
+    queue_ptr create_queue(size_t, c_void_ptr);
 
     /**
      * Function to add the element to to queue
@@ -32,7 +32,7 @@ extern "C"
      * @param data: data to add to queue
      * @return void(0)
     */
-    void add(queue *, const void *);
+    void add(queue_ptr, c_void_ptr);
 
     /**
      * Function to remove a node from queue from top
@@ -42,23 +42,35 @@ extern "C"
      * or use static varible pointer.
      * @return void(0)
     */
-    void dequeue(queue *, void *);
+    bool dequeue(queue_ptr, void_ptr);
 
     /**
      * Function to get top node data of the queue
      * @param q: queue pointer
      * @return data pointer if queue not empty else NULL
     */
-    void *peek(queue *);
+    void_ptr peek(queue_ptr);
+
+    /**
+     * TODO: Function to search an element from the given
+     * key with the help of compare function.
+     * 
+     * @param q: queue pointer
+     * @param key: key pointer
+     * @param comp_fun: compare function to get data from given 
+     * key which take data and key as argument.
+     * @return returns pointer to the data
+    */
+    void_ptr search(queue_ptr, void_ptr, bool (*)(void_ptr, void_ptr));
 
     /**
      * Print the string representation of queue
      * 
      * @param q: queue pointer
-     * @param print: print funtion with a data pointer argument
+     * @param print: print function with a data pointer argument
      * @return void(0)
     */
-    void print_queue(queue *, void (*)(void *));
+    void print_queue(queue_ptr, void (*)(void_ptr));
 
     /**
      * Function to get the current length of queue
@@ -66,14 +78,14 @@ extern "C"
      * @param q: queue pointer
      * @return length(int)
     */
-    int length(queue *);
+    int length(queue_ptr);
 
     /**
      * Function to clear all the memory created along with queue
      * 
-     * @param q: queue pointer
+     * @param q: queue double pointer
     */
-    void destroy_queue(queue *);
+    void destroy_queue(queue_ptr *);
 
     /**
      * Function to check if queue is empty
@@ -81,7 +93,7 @@ extern "C"
      * @param q: queue pointer
      * @return boolean
     */
-    bool is_empty(queue *);
+    bool is_empty(queue_ptr);
 
 #ifdef __cplusplus
 }

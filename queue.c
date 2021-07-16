@@ -1,3 +1,39 @@
+/* 
+MIT License
+
+Copyright (c) 2021 Naman Tamrakar
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+IDEA:
+Queue work on principle of FIFO
+i.e. first in first out
+
+So the idea here is to use a linked list
+for creating a queue for dynamic size handling.
+
+STRATEGY :-
+=========
+ADD:        add an element to the tail of linked list and point tail to it.
+DEQUEUE:    remove the element from the head and point head next to it.
+*/
+
 #include "queue.h"
 #include <stdio.h>
 #include <string.h>
@@ -133,12 +169,13 @@ void add(queue_ptr q, c_void_ptr data)
  * or use static varible pointer.
  * @return void(0)
 */
-void dequeue(queue_ptr q, void_ptr data)
+bool dequeue(queue_ptr q, void_ptr data)
 {
     // check for empty
     if (!q->head)
     {
-        printf("queue is empty");
+        printf("queue is empty\n");
+        return false;
     }
     else
     {
@@ -157,6 +194,8 @@ void dequeue(queue_ptr q, void_ptr data)
 
         // decrease length
         q->length -= 1;
+
+        return true;
     }
 }
 
@@ -174,13 +213,19 @@ void *peek(queue_ptr q)
  * Print the string representation of queue
  * 
  * @param q: queue pointer
- * @param print: print funtion with a data pointer argument
+ * @param print: print function with a data pointer argument
  * @return void(0)
 */
 void print_queue(
     queue_ptr q,
     void (*print)(void_ptr))
 {
+    if (q == NULL)
+    {
+        printf("queue pointer is NULL, %p\n", q);
+        return;
+    }
+
     // get the head pointer
     node_ptr head = q->head;
 
@@ -220,14 +265,15 @@ bool is_empty(queue_ptr q)
 /**
  * Function to clear all the memory created along with queue
  * 
- * @param q: queue pointer
+ * @param q: queue double pointer
 */
-void destroy_queue(queue_ptr q)
+void destroy_queue(queue_ptr *q)
 {
     // iterate until head is present
-    while (q->head)
+    while ((*q)->head)
     {
-        dequeue(q, NULL);
+        dequeue(*q, NULL);
     }
-    free(q);
+    free(*q);
+    *q = NULL;
 }
