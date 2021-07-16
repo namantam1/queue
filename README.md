@@ -1,3 +1,5 @@
+[![C/C++ CI](https://github.com/namantam1/queue/actions/workflows/CI.yaml/badge.svg)](https://github.com/namantam1/queue/actions/workflows/CI.yaml)
+
 # Queue Implementation in C Language
 
 ## Features - 
